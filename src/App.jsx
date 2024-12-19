@@ -6,7 +6,7 @@ import Cart from './pages/Cart';
 import { Provider } from 'react-redux';
 
 import { store } from '../src/redux/index'
-import { useEffect } from 'react';
+import AddRecipes from './pages/AddRecipes.jsx';
 function App() {
 
 	return (
@@ -18,6 +18,7 @@ function App() {
 					<Routes>
 						<Route element={<Cart />} path="/cart" exact />
 						<Route element={<Menu />} path="/" exact />
+						<Route element={<AddRecipes />} path="/AddRecipes" exact />
 					</Routes>
 				</BrowserRouter>
 			</Provider>

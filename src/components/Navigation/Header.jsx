@@ -23,6 +23,15 @@ const Header = () => {
 					>
 						Menu
 					</NavLink>
+					<NavLink
+						className={({ isActive }) =>
+							styles['nav-link'] +
+							(isActive ? ` ${styles['nav-link-active']}` : '')
+						}
+						to="/AddRecipes"
+					>
+						Recipes
+					</NavLink>
 				</li>
 				<li>
 					<NavLink

@@ -1,8 +1,9 @@
 import products from '../../data.json';
+
 const INIT_STATE = {
     cart: [],
     cartTotal: 0,
-    products
+    products: products.menu
 }
 
 
