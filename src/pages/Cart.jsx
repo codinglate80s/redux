@@ -1,13 +1,9 @@
 import React from 'react';
-import ProductsList from '../components/Products/ProductsList';
-import { store } from '../redux/index.js';
+import ProductsList from './../components/Products/ProductsList';
 import { useSelector } from 'react-redux';
 const Cart = () => {
+	const { cart, cartTotal } = useSelector((state) => state);
 
-	const cart = useSelector(state => state.cart)
-	const cartTotal = useSelector(state => state.cartTotal)
-
-	// const total = cart.reduce((a, b) => a + b.price, 0);
 	return (
 		<div>
 			<h1 style={{ textAlign: 'center', fontSize: '35px', color: '#e74c3c' }}>
@@ -24,9 +20,7 @@ const Cart = () => {
 				{' '}
 				total: {cartTotal}
 			</h4>
-
 			<ProductsList products={cart} />
-
 		</div>
 	);
 };

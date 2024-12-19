@@ -1,9 +1,13 @@
 import React from 'react';
-import ProductsList from '../components/Products/ProductsList';
 import { useSelector } from 'react-redux';
-const Menu = () => {
 
-	const products = useSelector(state => state.products)
+import ProductsList from '../components/Products/ProductsList';
+
+const Menu = () => {
+	const products = useSelector((state) => state.products);
+
+	console.log(products, 'Prducts Fro STOre');
+
 	return (
 		<div>
 			<h1 style={{ textAlign: 'center', fontSize: '35px', color: '#e74c3c' }}>

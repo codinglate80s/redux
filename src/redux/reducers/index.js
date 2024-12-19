@@ -37,24 +37,15 @@ const removeFromCartReducer = (state, payload) => {
 
 export const incQReducer = (state, payload) => {
 
-    let newCart = [...state]
-    // PRODUCT_INDEX > -1 : greter than -1  if index not esist so its value will be -1 
-    const PRODUCT_INDEX = newCart.findIndex(product => product.name == payload.name)
-    if (PRODUCT_INDEX) {
-
-
-
-        newCart = newCart.map(product => {
-            if (product.name == payload.name) {
-                return { ...product, quantity: product.quantity + 1 }
-            }
-            // we return product so we not do mutation for newCart
-            return product
-        })
-
-
-
-    }
+    // // PRODUCT_INDEX > -1 : greter than -1  if index not esist so its value will be -1 
+    // const PRODUCT_INDEX = newCart.findIndex(product => product.name == payload.name)
+    const newCart = [...state].map(product => {
+        if (product.name == payload.name) {
+            return { ...product, quantity: product.quantity + 1 }
+        }
+        // we return product so we not do mutation for newCart
+        return product
+    })
 
     return {
         ...state,
@@ -66,42 +57,22 @@ export const incQReducer = (state, payload) => {
 
 export const decQReducer = (state, payload) => {
 
-    let newCart = [...state]
+    // // PRODUCT_INDEX > -1 : greter than -1  if index not esist so its value will be -1 
+    // const PRODUCT_INDEX = newCart.findIndex(product => product.name == payload.name)
 
-    const PRODUCT_INDEX = newCart.findIndex(product => product.name == payload.name)
-    if (PRODUCT_INDEX) {
-
-
-        let pq = false;
-        let pn = ''
-
-        newCart = newCart.map(product => {
-            if (product.name == payload.name) {
-                if (product.quantity != 0) {
-                    return { ...product, quantity: product.quantity - 1 }
-                }
-            }
-            if (product.quantity <= 0) {
-                pq = true;
-            }
-            // we return product so we not do mutation for newCart
+    let newCart;
+    if (payload.quantity === 1) {
+        newCart = state.cart.filter((p) => p.name != payload.name)
+    } else {
+        newCart = [...state.cart].map(product => {
+            if (product.name == payload.name) return { ...product, quantity: product.quantity - 1 }
             return product
         })
-
-        if (pq) {
-            newCart = newCart.filter(p => p.quantity > 0)
-        }
-
-
     }
-
-
-
-
     return {
         ...state,
         cart: newCart,
-        cartTotal: returnCartTotals(newCart)
+        cartTotal: returnCartTotals(newCart),
     }
 }
 
@@ -120,7 +91,7 @@ const rootReducer = (state = INIT_STATE, action) => {
         case 'INC_Q':
             return incQReducer(state.cart, payload)
         case 'DEC_Q':
-            return decQReducer(state.cart, payload)
+            return decQReducer(state, payload)
         default:
             return state;
     }
